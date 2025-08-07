@@ -1,1 +1,838 @@
-!function(){"use strict";var e={n:function(t){var n=t&&t.__esModule?function(){return t.default}:function(){return t};return e.d(n,{a:n}),n},d:function(t,n){for(var o in n)e.o(n,o)&&!e.o(t,o)&&Object.defineProperty(t,o,{enumerable:!0,get:n[o]})},o:function(e,t){return Object.prototype.hasOwnProperty.call(e,t)}},t=window.wp.element,n=window.wp.domReady,o=e.n(n);const r={title:"",symbol:"0",effect:"none",layout:"right",expand:"",orderby:"name",orderdir:"ASC",showcount:!1,show_empty:!1,include_or_exclude:"include",expandCategories:[]},a=(0,t.createContext)(r),l=e=>{let{attributes:n,children:o}=e;const l={...r,...n},[i,s]=(0,t.useState)(l),c=e=>{const t={...r,...e};"undefined"!=typeof jclCurrentCat&&(t.expandCategories=jclCurrentCat.split(",").map(Number)),s(t)};return(0,t.useEffect)((()=>{c(n)}),[n]),(0,t.createElement)(a.Provider,{value:{config:i,setConfig:c}},o)};var i=window.wp.i18n,s=window.wp.apiFetch,c=e.n(s);function y(e){const[n,o]=(0,t.useState)(null),[r,a]=(0,t.useState)(null),[l,i]=(0,t.useState)(!1);return{apiClient:async function(t){let n=arguments.length>1&&void 0!==arguments[1]?arguments[1]:0;i(!0);const r=new URLSearchParams({orderby:t.orderby,orderdir:t.orderdir,parent:n,showEmpty:t.show_empty,taxonomy:"category",type:"post"});return"undefined"!=typeof jclCurrentCat&&t.onlycategory>0&&r.append("currentCat",jclCurrentCat),t.categories&&(r.append("exclusionType",t.include_or_exclude),r.append("cats",t.categories)),c()({path:`${e}?${r.toString()}`}).then((e=>{o(e),i(!1)})).catch((e=>{i(!1),a(e)}))},data:n,error:r,loading:l,setLoading:i}}function d(e,t){return"all"===e.expand||"sel_cat"===e.expand&&e.expandCategories.includes(t)}var u=e=>{let{expanded:n,title:o,permalink:r,onToggle:l}=e;const{config:i}=(0,t.useContext)(a),{expandSymbol:s,collapseSymbol:c}=function(e){let t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:"left",n="",o="";switch(e.toString()){case"1":n="▼",o="left"===t?"►":"◄";break;case"2":n="(–)",o="(+)";break;case"3":n="[–]",o="[+]"}return{collapseSymbol:n,expandSymbol:o}}(i.symbol,i.layout);if("0"===i.symbol.toString())return null;const y="jcl_symbol "+(n?"expanded":""),d=n?c:s;return"0"===i.symbol.toString()?"":(0,t.createElement)("a",{href:r,title:o,className:y,onClick:l},d)},p=e=>{let{category:n}=e;const{config:o}=(0,t.useContext)(a);let r=n.name;return o.showcount&&(r+=` (${n.count})`),(0,t.createElement)("a",{href:n.url,title:n.name},r)},m=e=>{let{loading:n}=e;return n?(0,t.createElement)("div",{className:"loading",role:"progressbar"},(0,t.createElement)("svg",{xmlns:"http://www.w3.org/2000/svg",x:"0",y:"0",version:"1.1",viewBox:"0 0 100 100",xmlSpace:"preserve"},(0,t.createElement)("path",{fill:"#000",d:"M73 50c0-12.7-10.3-23-23-23S27 37.3 27 50m3.9 0c0-10.5 8.5-19.1 19.1-19.1S69.1 39.5 69.1 50"},(0,t.createElement)("animateTransform",{attributeName:"transform",attributeType:"XML",dur:"1s",from:"0 50 50",repeatCount:"indefinite",to:"360 50 50",type:"rotate"})))):""};const g=e=>{let{category:n,animationFunction:o}=e;const{loading:r,data:l,apiClient:i}=y("/jcl/v1/categories"),{config:s}=(0,t.useContext)(a),[c,f]=(0,t.useState)(d(s,n.id)),w=(0,t.useMemo)((()=>"left"===s.layout),[s]),h=parseInt(n.child_num,10)>0,v=(0,t.useRef)(null),b=async e=>{e.preventDefault(),l&&Array.isArray(l.categories)||await i(s,n.id),f(!c)},E=()=>h?(0,t.createElement)(u,{expanded:c,permalink:n.url,title:n.name,onToggle:b}):(0,t.createElement)("div",{className:"jcl_symbol no_child"});(0,t.useEffect)((()=>{!c||l&&Array.isArray(l.categories)||i(s,n.id),(()=>{const e=[...v.current.children].filter((e=>"ul"===e.nodeName.toLowerCase()));e.length>0&&o(e[0])})()}),[c]);const x=d(s,n.id)?"":"jcl-hide";return(0,t.createElement)("li",{ref:v},w?(0,t.createElement)(E,null):"",(0,t.createElement)(p,{category:n}),w?"":(0,t.createElement)(E,null),(0,t.createElement)(m,{loading:r}),h&&l&&l.categories.length>0?(0,t.createElement)("ul",{className:x},l.categories.map((e=>(0,t.createElement)(g,{key:e.id,category:e,animationFunction:o})))):"")};var f=g;var w=()=>{const{config:e}=(0,t.useContext)(a),[n,o]=(0,t.useState)(!1),{loading:r,data:l,error:s,apiClient:c}=y("/jcl/v1/categories"),d=function(e){const n="function"==typeof window.requestAnimationFrame,o=function(e){let t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:500;return"none"===window.getComputedStyle(e).display?function(e){let t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:500;e.style.removeProperty("display");let o=window.getComputedStyle(e).display;"none"===o&&(o="block"),e.style.display=o,e.style.opacity=0;let r=+new Date;const a=function(){e.style.opacity=+e.style.opacity+(new Date-r)/t,r=+new Date,+e.style.opacity<1&&(n?window.requestAnimationFrame(a):setTimeout(a,16))};a()}(e,t):function(e){let t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:500;e.style.display="",e.style.opacity=1;let o=+new Date;const r=function(){e.style.opacity=Number(+e.style.opacity-(new Date-o)/t).toFixed(4),o=+new Date,-e.style.opacity<=0?n?window.requestAnimationFrame(r):setTimeout(r,16):e.style.display="none"};r()}(e,t)},r=function(e){let t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:500;return"none"===window.getComputedStyle(e).display?function(e){let t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:500;e.style.removeProperty("display");let n=window.getComputedStyle(e).display;"none"===n&&(n="block"),e.style.display=n;const o=e.offsetHeight;e.style.overflow="hidden",e.style.height=0,e.style.paddingTop=0,e.style.paddingBottom=0,e.style.marginTop=0,e.style.marginBottom=0,e.style.boxSizing="border-box",e.style.transitionProperty="height, margin, padding",e.style.transitionDuration=t+"ms",e.style.height=o+"px",e.style.removeProperty("padding-top"),e.style.removeProperty("padding-bottom"),e.style.removeProperty("margin-top"),e.style.removeProperty("margin-bottom"),window.setTimeout((()=>{e.style.removeProperty("height"),e.style.removeProperty("overflow"),e.style.removeProperty("transition-duration"),e.style.removeProperty("transition-property")}),t)}(e,t):function(e){let t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:500;e.style.transitionProperty="height, margin, padding",e.style.transitionDuration=t+"ms",e.style.boxSizing="border-box",e.style.height=e.offsetHeight+"px",e.style.overflow="hidden",e.style.height=0,e.style.paddingTop=0,e.style.paddingBottom=0,e.style.marginTop=0,e.style.marginBottom=0,window.setTimeout((()=>{e.style.display="none",e.style.removeProperty("height"),e.style.removeProperty("padding-top"),e.style.removeProperty("padding-bottom"),e.style.removeProperty("margin-top"),e.style.removeProperty("margin-bottom"),e.style.removeProperty("overflow"),e.style.removeProperty("transition-duration"),e.style.removeProperty("transition-property")}),t)}(e,t)},a=e=>{"none"===window.getComputedStyle(e).display?e.style.removeProperty("display"):e.style.display="none"},[l,i]=(0,t.useState)(null);return(0,t.useEffect)((()=>{i((()=>{let t;switch(e){case"fade":t=o;break;case"slide":t=r;break;default:t=a}return t}))}),[e]),l}(e.effect);return(0,t.useEffect)((()=>{c(e)}),[]),(0,t.useEffect)((()=>{n||!s&&!n||o(!0)}),[n,s]),(0,t.createElement)("div",{className:`js-categories-list layout-${e.layout}`},(0,t.createElement)("h2",null,e.title),r?(0,t.createElement)("div",null,(0,t.createElement)(m,{loading:r}),(0,i.__)("Loading…","jcl_i18n")):"",!r&&l&&l.categories?(0,t.createElement)("ul",{className:"jcl_widget"},0===l.categories.length?(0,t.createElement)("li",null,(0,i.__)("There are no categories to show.","jcl_i18n")):l.categories.map((e=>(0,t.createElement)(f,{key:e.id,category:e,animationFunction:d})))):"",!n&&!s||l?"":(0,i.__)("Cannot load categories.","jcl_i18n"))},h=e=>{let{attributes:n}=e;return(0,t.createElement)(l,{attributes:n},(0,t.createElement)(w,null))};o()((function(){document.querySelectorAll(".wp-block-jquery-categories-list-categories-block").forEach((e=>{const n={...e.dataset};(0,t.render)((0,t.createElement)(h,{attributes:n}),e)}))}))}();
+/******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./src/components/frontend/App.js":
+/*!****************************************!*\
+  !*** ./src/components/frontend/App.js ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _context_ConfigContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./context/ConfigContext */ "./src/components/frontend/context/ConfigContext.js");
+/* harmony import */ var _JsCategoriesList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./JsCategoriesList */ "./src/components/frontend/JsCategoriesList.js");
+
+/**
+ * Internal dependencies
+ */
+
+
+const App = ({
+  attributes
+}) => {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_context_ConfigContext__WEBPACK_IMPORTED_MODULE_1__.ConfigProvider, {
+    attributes: attributes
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_JsCategoriesList__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);
+
+/***/ }),
+
+/***/ "./src/components/frontend/JsCategoriesList.js":
+/*!*****************************************************!*\
+  !*** ./src/components/frontend/JsCategoriesList.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _components_DisplayCategory_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/DisplayCategory.js */ "./src/components/frontend/components/DisplayCategory.js");
+/* harmony import */ var _hooks_useAnimation__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./hooks/useAnimation */ "./src/components/frontend/hooks/useAnimation.js");
+/* harmony import */ var _context_ConfigContext__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./context/ConfigContext */ "./src/components/frontend/context/ConfigContext.js");
+/* harmony import */ var _hooks_useApi__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./hooks/useApi */ "./src/components/frontend/hooks/useApi.js");
+/* harmony import */ var _components_Loading__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Loading */ "./src/components/frontend/components/Loading.js");
+
+/**
+ * WordPress dependencies
+ */
+
+
+
+/**
+ * Internal dependencies
+ */
+
+
+
+
+
+const JsCategoriesList = () => {
+  const {
+    config
+  } = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useContext)(_context_ConfigContext__WEBPACK_IMPORTED_MODULE_5__.ConfigContext);
+  const [loaded, setLoaded] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
+  const {
+    loading,
+    data: apiData,
+    error,
+    apiClient: loadCategories
+  } = (0,_hooks_useApi__WEBPACK_IMPORTED_MODULE_6__["default"])('/jcl/v1/categories');
+  const animationFunction = (0,_hooks_useAnimation__WEBPACK_IMPORTED_MODULE_4__["default"])(config.effect);
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    loadCategories(config);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    if (!loaded && (error || loaded)) {
+      setLoaded(true);
+    }
+  }, [loaded, error]);
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: `js-categories-list layout-${config.layout}`
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, config.title), loading ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Loading__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    loading: loading
+  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Loading…', 'jcl_i18n')) : '', !loading && apiData && apiData.categories ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("ul", {
+    className: "jcl_widget"
+  }, apiData.categories.length === 0 ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("li", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('There are no categories to show.', 'jcl_i18n')) : apiData.categories.map(category => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_DisplayCategory_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    key: category.id,
+    category: category,
+    animationFunction: animationFunction
+  }))) : '', (loaded || error) && !apiData ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Cannot load categories.', 'jcl_i18n') : '');
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (JsCategoriesList);
+
+/***/ }),
+
+/***/ "./src/components/frontend/components/BulletWithSymbol.js":
+/*!****************************************************************!*\
+  !*** ./src/components/frontend/components/BulletWithSymbol.js ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _context_ConfigContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../context/ConfigContext */ "./src/components/frontend/context/ConfigContext.js");
+/* harmony import */ var _hooks_useFrontend__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../hooks/useFrontend */ "./src/components/frontend/hooks/useFrontend.js");
+
+/**
+ * WordPress dependencies
+ */
+
+
+/**
+ * Internal dependencies
+ */
+
+
+const BulletWithSymbol = ({
+  expanded,
+  title,
+  permalink,
+  onToggle
+}) => {
+  const {
+    config
+  } = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useContext)(_context_ConfigContext__WEBPACK_IMPORTED_MODULE_2__.ConfigContext);
+  const {
+    expandSymbol,
+    collapseSymbol
+  } = (0,_hooks_useFrontend__WEBPACK_IMPORTED_MODULE_3__.useSymbol)(config.symbol, config.layout);
+  if (config.symbol.toString() === '0') {
+    return null;
+  }
+  const expandedClass = 'jcl_symbol ' + (expanded ? 'expanded' : '');
+  const symbol = expanded ? collapseSymbol : expandSymbol;
+
+  // Do not show the component if it's disabled in the options.
+  if (config.symbol.toString() === '0') {
+    return '';
+  }
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    href: permalink,
+    title: title,
+    className: expandedClass,
+    onClick: onToggle
+  }, symbol);
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (BulletWithSymbol);
+
+/***/ }),
+
+/***/ "./src/components/frontend/components/CategoryLink.js":
+/*!************************************************************!*\
+  !*** ./src/components/frontend/components/CategoryLink.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _context_ConfigContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../context/ConfigContext */ "./src/components/frontend/context/ConfigContext.js");
+
+/**
+ * WordPress dependencies
+ */
+
+
+/**
+ * Internal dependencies
+ */
+
+const CategoryLink = ({
+  category
+}) => {
+  const {
+    config
+  } = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useContext)(_context_ConfigContext__WEBPACK_IMPORTED_MODULE_2__.ConfigContext);
+  let linkContent = category.name;
+  if (config.showcount) {
+    linkContent += ` (${category.count})`;
+  }
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    href: category.url,
+    title: category.name
+  }, linkContent);
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CategoryLink);
+
+/***/ }),
+
+/***/ "./src/components/frontend/components/DisplayCategory.js":
+/*!***************************************************************!*\
+  !*** ./src/components/frontend/components/DisplayCategory.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _context_ConfigContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../context/ConfigContext */ "./src/components/frontend/context/ConfigContext.js");
+/* harmony import */ var _hooks_useApi__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../hooks/useApi */ "./src/components/frontend/hooks/useApi.js");
+/* harmony import */ var _hooks_useFrontend__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../hooks/useFrontend */ "./src/components/frontend/hooks/useFrontend.js");
+/* harmony import */ var _BulletWithSymbol__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./BulletWithSymbol */ "./src/components/frontend/components/BulletWithSymbol.js");
+/* harmony import */ var _CategoryLink__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./CategoryLink */ "./src/components/frontend/components/CategoryLink.js");
+/* harmony import */ var _Loading__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Loading */ "./src/components/frontend/components/Loading.js");
+
+/**
+ * WordPress dependencies
+ */
+
+
+/**
+ * Internal dependencies
+ */
+
+
+
+
+
+
+const DisplayCategory = ({
+  category,
+  animationFunction
+}) => {
+  const {
+    loading,
+    data: apiData,
+    apiClient: loadCategories
+  } = (0,_hooks_useApi__WEBPACK_IMPORTED_MODULE_3__["default"])('/jcl/v1/categories');
+  const {
+    config
+  } = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useContext)(_context_ConfigContext__WEBPACK_IMPORTED_MODULE_2__.ConfigContext);
+  const [expand, setExpand] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)((0,_hooks_useFrontend__WEBPACK_IMPORTED_MODULE_4__.initialExpand)(config, category.id));
+  const isLayoutLeft = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useMemo)(() => config.layout === 'left', [config]);
+  const hasChilds = parseInt(category.child_num, 10) > 0;
+  const listElement = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
+  const handleToggle = async event => {
+    event.preventDefault();
+    if (!apiData || !Array.isArray(apiData.categories)) {
+      await loadCategories(config, category.id);
+    }
+    setExpand(!expand);
+  };
+  const animateList = () => {
+    const categoriesList = [...listElement.current.children].filter(ch => ch.nodeName.toLowerCase() === 'ul');
+    if (categoriesList.length > 0) animationFunction(categoriesList[0]);
+  };
+  const Toggler = () => {
+    return hasChilds ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_BulletWithSymbol__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      expanded: expand,
+      permalink: category.url,
+      title: category.name,
+      onToggle: handleToggle
+    }) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "jcl_symbol no_child"
+    });
+  };
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    if (expand && (!apiData || !Array.isArray(apiData.categories))) {
+      loadCategories(config, category.id);
+    }
+    animateList();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [expand]);
+  const childClassName = (0,_hooks_useFrontend__WEBPACK_IMPORTED_MODULE_4__.initialExpand)(config, category.id) ? '' : 'jcl-hide';
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("li", {
+    ref: listElement
+  }, isLayoutLeft ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Toggler, null) : '', (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_CategoryLink__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    category: category
+  }), !isLayoutLeft ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Toggler, null) : '', (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Loading__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    loading: loading
+  }), hasChilds && apiData && apiData.categories.length > 0 ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("ul", {
+    className: childClassName
+  }, apiData.categories.map(subCategory => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(DisplayCategory, {
+    key: subCategory.id,
+    category: subCategory,
+    animationFunction: animationFunction
+  }))) : '');
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DisplayCategory);
+
+/***/ }),
+
+/***/ "./src/components/frontend/components/Loading.js":
+/*!*******************************************************!*\
+  !*** ./src/components/frontend/components/Loading.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+const Loading = ({
+  loading
+}) => {
+  if (loading) {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "loading",
+      role: "progressbar"
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+      xmlns: "http://www.w3.org/2000/svg",
+      x: "0",
+      y: "0",
+      version: "1.1",
+      viewBox: "0 0 100 100",
+      xmlSpace: "preserve"
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+      fill: "#000",
+      d: "M73 50c0-12.7-10.3-23-23-23S27 37.3 27 50m3.9 0c0-10.5 8.5-19.1 19.1-19.1S69.1 39.5 69.1 50"
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("animateTransform", {
+      attributeName: "transform",
+      attributeType: "XML",
+      dur: "1s",
+      from: "0 50 50",
+      repeatCount: "indefinite",
+      to: "360 50 50",
+      type: "rotate"
+    }))));
+  }
+  return '';
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Loading);
+
+/***/ }),
+
+/***/ "./src/components/frontend/context/ConfigContext.js":
+/*!**********************************************************!*\
+  !*** ./src/components/frontend/context/ConfigContext.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   ConfigContext: () => (/* binding */ ConfigContext),
+/* harmony export */   ConfigProvider: () => (/* binding */ ConfigProvider),
+/* harmony export */   defaultConfig: () => (/* binding */ defaultConfig)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+
+/**
+ * WordPress dependencies
+ */
+
+const defaultConfig = {
+  title: '',
+  symbol: '0',
+  effect: 'none',
+  layout: 'right',
+  expand: '',
+  orderby: 'name',
+  orderdir: 'ASC',
+  showcount: false,
+  show_empty: false,
+  include_or_exclude: 'include',
+  expandCategories: []
+};
+const ConfigContext = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createContext)(defaultConfig);
+const ConfigProvider = ({
+  attributes,
+  children
+}) => {
+  const initialConfig = {
+    ...defaultConfig,
+    ...attributes
+  };
+  const [config, updateContextConfig] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(initialConfig);
+  const setConfig = newConfig => {
+    const parsedConfig = {
+      ...defaultConfig,
+      ...newConfig
+    };
+
+    /* global jclCurrentCat */
+    if (typeof jclCurrentCat !== 'undefined') {
+      parsedConfig.expandCategories = jclCurrentCat.split(',').map(Number);
+    }
+    updateContextConfig(parsedConfig);
+  };
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    setConfig(attributes);
+  }, [attributes]);
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(ConfigContext.Provider, {
+    value: {
+      config,
+      setConfig
+    }
+  }, children);
+};
+
+/***/ }),
+
+/***/ "./src/components/frontend/hooks/useAnimation.js":
+/*!*******************************************************!*\
+  !*** ./src/components/frontend/hooks/useAnimation.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ useAnimation)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+
+function useAnimation(effect) {
+  const supportsRequestAnimation = typeof window.requestAnimationFrame === 'function';
+  const fadeIn = (element, duration = 500) => {
+    element.style.removeProperty('display');
+    let display = window.getComputedStyle(element).display;
+    if (display === 'none') {
+      display = 'block';
+    }
+    element.style.display = display;
+    element.style.opacity = 0;
+    let last = +new Date();
+    const tick = function () {
+      element.style.opacity = +element.style.opacity + (new Date() - last) / duration;
+      last = +new Date();
+      if (+element.style.opacity < 1) {
+        if (supportsRequestAnimation) window.requestAnimationFrame(tick);else setTimeout(tick, 16);
+      }
+    };
+    tick();
+  };
+  const fadeOut = (element, duration = 500) => {
+    element.style.display = '';
+    element.style.opacity = 1;
+    let last = +new Date();
+    const tick = function () {
+      element.style.opacity = Number(+element.style.opacity - (new Date() - last) / duration).toFixed(4);
+      last = +new Date();
+      if (-element.style.opacity <= 0) {
+        if (supportsRequestAnimation) window.requestAnimationFrame(tick);else setTimeout(tick, 16);
+      } else {
+        element.style.display = 'none';
+      }
+    };
+    tick();
+  };
+  const fadeToggle = (target, duration = 500) => {
+    if (window.getComputedStyle(target).display === 'none') {
+      return fadeIn(target, duration);
+    }
+    return fadeOut(target, duration);
+  };
+  const slideUp = (target, duration = 500) => {
+    target.style.transitionProperty = 'height, margin, padding';
+    target.style.transitionDuration = duration + 'ms';
+    target.style.boxSizing = 'border-box';
+    target.style.height = target.offsetHeight + 'px';
+    target.style.overflow = 'hidden';
+    target.style.height = 0;
+    target.style.paddingTop = 0;
+    target.style.paddingBottom = 0;
+    target.style.marginTop = 0;
+    target.style.marginBottom = 0;
+    window.setTimeout(() => {
+      target.style.display = 'none';
+      target.style.removeProperty('height');
+      target.style.removeProperty('padding-top');
+      target.style.removeProperty('padding-bottom');
+      target.style.removeProperty('margin-top');
+      target.style.removeProperty('margin-bottom');
+      target.style.removeProperty('overflow');
+      target.style.removeProperty('transition-duration');
+      target.style.removeProperty('transition-property');
+    }, duration);
+  };
+  const slideDown = (target, duration = 500) => {
+    target.style.removeProperty('display');
+    let display = window.getComputedStyle(target).display;
+    if (display === 'none') {
+      display = 'block';
+    }
+    target.style.display = display;
+    const height = target.offsetHeight;
+    target.style.overflow = 'hidden';
+    target.style.height = 0;
+    target.style.paddingTop = 0;
+    target.style.paddingBottom = 0;
+    target.style.marginTop = 0;
+    target.style.marginBottom = 0;
+    target.style.boxSizing = 'border-box';
+    target.style.transitionProperty = 'height, margin, padding';
+    target.style.transitionDuration = duration + 'ms';
+    target.style.height = height + 'px';
+    target.style.removeProperty('padding-top');
+    target.style.removeProperty('padding-bottom');
+    target.style.removeProperty('margin-top');
+    target.style.removeProperty('margin-bottom');
+    window.setTimeout(() => {
+      target.style.removeProperty('height');
+      target.style.removeProperty('overflow');
+      target.style.removeProperty('transition-duration');
+      target.style.removeProperty('transition-property');
+    }, duration);
+  };
+  const slideToggle = (target, duration = 500) => {
+    if (window.getComputedStyle(target).display === 'none') {
+      return slideDown(target, duration);
+    }
+    return slideUp(target, duration);
+  };
+  const showToggle = target => {
+    if (window.getComputedStyle(target).display === 'none') {
+      target.style.removeProperty('display');
+    } else {
+      target.style.display = 'none';
+    }
+  };
+  const [animationFunction, setAnimationFunction] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    setAnimationFunction(() => {
+      let animationFn;
+      switch (effect) {
+        case 'fade':
+          animationFn = fadeToggle;
+          break;
+        case 'slide':
+          animationFn = slideToggle;
+          break;
+        default:
+          animationFn = showToggle;
+          break;
+      }
+      return animationFn;
+    });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [effect]);
+  return animationFunction;
+}
+
+/***/ }),
+
+/***/ "./src/components/frontend/hooks/useApi.js":
+/*!*************************************************!*\
+  !*** ./src/components/frontend/hooks/useApi.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ useApi)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__);
+/**
+ * WordPress dependencies
+ */
+
+
+
+/**
+ * Internal dependencies
+ *
+ * @param {string} url
+ */
+function useApi(url) {
+  const [data, setData] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+  const [error, setError] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+  const [loading, setLoading] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+
+  /* global jclCurrentCat */
+  const apiClient = async function (config, parent = 0) {
+    setLoading(true);
+    const params = new URLSearchParams({
+      orderby: config.orderby,
+      orderdir: config.orderdir,
+      parent,
+      showEmpty: config.show_empty,
+      taxonomy: 'category',
+      type: 'post'
+    });
+    if (typeof jclCurrentCat !== 'undefined' && config.onlycategory > 0) {
+      params.append('currentCat', jclCurrentCat);
+    }
+    if (config.categories) {
+      params.append('exclusionType', config.include_or_exclude);
+      params.append('cats', config.categories);
+    }
+    return _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default()({
+      path: `${url}?${params.toString()}`
+    }).then(response => {
+      setData(response);
+      setLoading(false);
+    }).catch(e => {
+      setLoading(false);
+      setError(e);
+    });
+  };
+  return {
+    apiClient,
+    data,
+    error,
+    loading,
+    setLoading
+  };
+}
+
+/***/ }),
+
+/***/ "./src/components/frontend/hooks/useFrontend.js":
+/*!******************************************************!*\
+  !*** ./src/components/frontend/hooks/useFrontend.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   initialExpand: () => (/* binding */ initialExpand),
+/* harmony export */   useSymbol: () => (/* binding */ useSymbol)
+/* harmony export */ });
+function useSymbol(symbol, layout = 'left') {
+  let collapseSymbol = '';
+  let expandSymbol = '';
+  switch (symbol.toString()) {
+    case '1':
+      collapseSymbol = '▼';
+      expandSymbol = layout === 'left' ? '►' : '◄';
+      break;
+    case '2':
+      collapseSymbol = '(–)';
+      expandSymbol = '(+)';
+      break;
+    case '3':
+      collapseSymbol = '[–]';
+      expandSymbol = '[+]';
+      break;
+  }
+  return {
+    collapseSymbol,
+    expandSymbol
+  };
+}
+function initialExpand(config, categoryId) {
+  if (config.expand === 'all') return true;
+  return config.expand === 'sel_cat' && config.expandCategories.includes(categoryId);
+}
+
+/***/ }),
+
+/***/ "react":
+/*!************************!*\
+  !*** external "React" ***!
+  \************************/
+/***/ ((module) => {
+
+module.exports = window["React"];
+
+/***/ }),
+
+/***/ "@wordpress/api-fetch":
+/*!**********************************!*\
+  !*** external ["wp","apiFetch"] ***!
+  \**********************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["apiFetch"];
+
+/***/ }),
+
+/***/ "@wordpress/dom-ready":
+/*!**********************************!*\
+  !*** external ["wp","domReady"] ***!
+  \**********************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["domReady"];
+
+/***/ }),
+
+/***/ "@wordpress/element":
+/*!*********************************!*\
+  !*** external ["wp","element"] ***!
+  \*********************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["element"];
+
+/***/ }),
+
+/***/ "@wordpress/i18n":
+/*!******************************!*\
+  !*** external ["wp","i18n"] ***!
+  \******************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["i18n"];
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+(() => {
+/*!*********************!*\
+  !*** ./src/view.js ***!
+  \*********************/
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/dom-ready */ "@wordpress/dom-ready");
+/* harmony import */ var _wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _components_frontend_App__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/frontend/App */ "./src/components/frontend/App.js");
+
+/**
+ * WordPress dependencies
+ */
+
+
+
+/**
+ * Internal dependencies
+ */
+
+_wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_1___default()(function () {
+  const jclInstances = document.querySelectorAll('.wp-block-jquery-categories-list-categories-block');
+  jclInstances.forEach(container => {
+    const attributes = {
+      ...container.dataset
+    };
+    (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.render)((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_frontend_App__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      attributes: attributes
+    }), container);
+  });
+});
+})();
+
+/******/ })()
+;
+//# sourceMappingURL=view.js.map
