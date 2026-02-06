@@ -2,10 +2,10 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/components/frontend/App.js":
-/*!****************************************!*\
-  !*** ./src/components/frontend/App.js ***!
-  \****************************************/
+/***/ "./src/components/frontend/App.tsx":
+/*!*****************************************!*\
+  !*** ./src/components/frontend/App.tsx ***!
+  \*****************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -14,8 +14,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _context_ConfigContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./context/ConfigContext */ "./src/components/frontend/context/ConfigContext.js");
-/* harmony import */ var _JsCategoriesList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./JsCategoriesList */ "./src/components/frontend/JsCategoriesList.js");
+/* harmony import */ var _context_ConfigContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./context/ConfigContext */ "./src/components/frontend/context/ConfigContext.tsx");
+/* harmony import */ var _JsCategoriesList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./JsCategoriesList */ "./src/components/frontend/JsCategoriesList.tsx");
 
 /**
  * Internal dependencies
@@ -33,10 +33,10 @@ const App = ({
 
 /***/ }),
 
-/***/ "./src/components/frontend/JsCategoriesList.js":
-/*!*****************************************************!*\
-  !*** ./src/components/frontend/JsCategoriesList.js ***!
-  \*****************************************************/
+/***/ "./src/components/frontend/JsCategoriesList.tsx":
+/*!******************************************************!*\
+  !*** ./src/components/frontend/JsCategoriesList.tsx ***!
+  \******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -49,11 +49,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _components_DisplayCategory_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/DisplayCategory.js */ "./src/components/frontend/components/DisplayCategory.js");
-/* harmony import */ var _hooks_useAnimation__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./hooks/useAnimation */ "./src/components/frontend/hooks/useAnimation.js");
-/* harmony import */ var _context_ConfigContext__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./context/ConfigContext */ "./src/components/frontend/context/ConfigContext.js");
-/* harmony import */ var _hooks_useApi__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./hooks/useApi */ "./src/components/frontend/hooks/useApi.js");
-/* harmony import */ var _components_Loading__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Loading */ "./src/components/frontend/components/Loading.js");
+/* harmony import */ var _components_DisplayCategory__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/DisplayCategory */ "./src/components/frontend/components/DisplayCategory.tsx");
+/* harmony import */ var _hooks_useAnimation__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./hooks/useAnimation */ "./src/components/frontend/hooks/useAnimation.ts");
+/* harmony import */ var _context_ConfigContext__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./context/ConfigContext */ "./src/components/frontend/context/ConfigContext.tsx");
+/* harmony import */ var _hooks_useApi__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./hooks/useApi */ "./src/components/frontend/hooks/useApi.ts");
+/* harmony import */ var _components_Loading__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Loading */ "./src/components/frontend/components/Loading.tsx");
 
 /**
  * WordPress dependencies
@@ -96,7 +96,7 @@ const JsCategoriesList = () => {
     loading: loading
   }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Loading…', 'jcl_i18n')) : '', !loading && apiData && apiData.categories ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("ul", {
     className: "jcl_widget"
-  }, apiData.categories.length === 0 ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("li", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('There are no categories to show.', 'jcl_i18n')) : apiData.categories.map(category => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_DisplayCategory_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, apiData.categories.length === 0 ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("li", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('There are no categories to show.', 'jcl_i18n')) : apiData.categories.map(category => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_DisplayCategory__WEBPACK_IMPORTED_MODULE_3__["default"], {
     key: category.id,
     category: category,
     animationFunction: animationFunction
@@ -106,10 +106,10 @@ const JsCategoriesList = () => {
 
 /***/ }),
 
-/***/ "./src/components/frontend/components/BulletWithSymbol.js":
-/*!****************************************************************!*\
-  !*** ./src/components/frontend/components/BulletWithSymbol.js ***!
-  \****************************************************************/
+/***/ "./src/components/frontend/components/BulletWithSymbol.tsx":
+/*!*****************************************************************!*\
+  !*** ./src/components/frontend/components/BulletWithSymbol.tsx ***!
+  \*****************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -120,13 +120,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _context_ConfigContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../context/ConfigContext */ "./src/components/frontend/context/ConfigContext.js");
-/* harmony import */ var _hooks_useFrontend__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../hooks/useFrontend */ "./src/components/frontend/hooks/useFrontend.js");
+/* harmony import */ var _context_ConfigContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../context/ConfigContext */ "./src/components/frontend/context/ConfigContext.tsx");
+/* harmony import */ var _hooks_useFrontend__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../hooks/useFrontend */ "./src/components/frontend/hooks/useFrontend.ts");
 
 /**
  * WordPress dependencies
  */
-
 
 /**
  * Internal dependencies
@@ -167,10 +166,10 @@ const BulletWithSymbol = ({
 
 /***/ }),
 
-/***/ "./src/components/frontend/components/CategoryLink.js":
-/*!************************************************************!*\
-  !*** ./src/components/frontend/components/CategoryLink.js ***!
-  \************************************************************/
+/***/ "./src/components/frontend/components/CategoryLink.tsx":
+/*!*************************************************************!*\
+  !*** ./src/components/frontend/components/CategoryLink.tsx ***!
+  \*************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -181,7 +180,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _context_ConfigContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../context/ConfigContext */ "./src/components/frontend/context/ConfigContext.js");
+/* harmony import */ var _context_ConfigContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../context/ConfigContext */ "./src/components/frontend/context/ConfigContext.tsx");
 
 /**
  * WordPress dependencies
@@ -211,10 +210,10 @@ const CategoryLink = ({
 
 /***/ }),
 
-/***/ "./src/components/frontend/components/DisplayCategory.js":
-/*!***************************************************************!*\
-  !*** ./src/components/frontend/components/DisplayCategory.js ***!
-  \***************************************************************/
+/***/ "./src/components/frontend/components/DisplayCategory.tsx":
+/*!****************************************************************!*\
+  !*** ./src/components/frontend/components/DisplayCategory.tsx ***!
+  \****************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -225,17 +224,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _context_ConfigContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../context/ConfigContext */ "./src/components/frontend/context/ConfigContext.js");
-/* harmony import */ var _hooks_useApi__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../hooks/useApi */ "./src/components/frontend/hooks/useApi.js");
-/* harmony import */ var _hooks_useFrontend__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../hooks/useFrontend */ "./src/components/frontend/hooks/useFrontend.js");
-/* harmony import */ var _BulletWithSymbol__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./BulletWithSymbol */ "./src/components/frontend/components/BulletWithSymbol.js");
-/* harmony import */ var _CategoryLink__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./CategoryLink */ "./src/components/frontend/components/CategoryLink.js");
-/* harmony import */ var _Loading__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Loading */ "./src/components/frontend/components/Loading.js");
+/* harmony import */ var _context_ConfigContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../context/ConfigContext */ "./src/components/frontend/context/ConfigContext.tsx");
+/* harmony import */ var _hooks_useApi__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../hooks/useApi */ "./src/components/frontend/hooks/useApi.ts");
+/* harmony import */ var _hooks_useFrontend__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../hooks/useFrontend */ "./src/components/frontend/hooks/useFrontend.ts");
+/* harmony import */ var _BulletWithSymbol__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./BulletWithSymbol */ "./src/components/frontend/components/BulletWithSymbol.tsx");
+/* harmony import */ var _CategoryLink__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./CategoryLink */ "./src/components/frontend/components/CategoryLink.tsx");
+/* harmony import */ var _Loading__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Loading */ "./src/components/frontend/components/Loading.tsx");
 
 /**
  * WordPress dependencies
  */
-
 
 /**
  * Internal dependencies
@@ -260,7 +258,7 @@ const DisplayCategory = ({
   } = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useContext)(_context_ConfigContext__WEBPACK_IMPORTED_MODULE_2__.ConfigContext);
   const [expand, setExpand] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)((0,_hooks_useFrontend__WEBPACK_IMPORTED_MODULE_4__.initialExpand)(config, category.id));
   const isLayoutLeft = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useMemo)(() => config.layout === 'left', [config]);
-  const hasChilds = parseInt(category.child_num, 10) > 0;
+  const hasChilds = parseInt(String(category.child_num), 10) > 0;
   const listElement = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
   const handleToggle = async event => {
     event.preventDefault();
@@ -270,8 +268,13 @@ const DisplayCategory = ({
     setExpand(!expand);
   };
   const animateList = () => {
+    if (!listElement.current) {
+      return;
+    }
     const categoriesList = [...listElement.current.children].filter(ch => ch.nodeName.toLowerCase() === 'ul');
-    if (categoriesList.length > 0) animationFunction(categoriesList[0]);
+    if (categoriesList.length > 0 && animationFunction) {
+      animationFunction(categoriesList[0]);
+    }
   };
   const Toggler = () => {
     return hasChilds ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_BulletWithSymbol__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -309,10 +312,10 @@ const DisplayCategory = ({
 
 /***/ }),
 
-/***/ "./src/components/frontend/components/Loading.js":
-/*!*******************************************************!*\
-  !*** ./src/components/frontend/components/Loading.js ***!
-  \*******************************************************/
+/***/ "./src/components/frontend/components/Loading.tsx":
+/*!********************************************************!*\
+  !*** ./src/components/frontend/components/Loading.tsx ***!
+  \********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -355,10 +358,10 @@ const Loading = ({
 
 /***/ }),
 
-/***/ "./src/components/frontend/context/ConfigContext.js":
-/*!**********************************************************!*\
-  !*** ./src/components/frontend/context/ConfigContext.js ***!
-  \**********************************************************/
+/***/ "./src/components/frontend/context/ConfigContext.tsx":
+/*!***********************************************************!*\
+  !*** ./src/components/frontend/context/ConfigContext.tsx ***!
+  \***********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -389,7 +392,11 @@ const defaultConfig = {
   include_or_exclude: 'include',
   expandCategories: []
 };
-const ConfigContext = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createContext)(defaultConfig);
+const defaultContext = {
+  config: defaultConfig,
+  setConfig: () => undefined
+};
+const ConfigContext = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createContext)(defaultContext);
 const ConfigProvider = ({
   attributes,
   children
@@ -424,9 +431,9 @@ const ConfigProvider = ({
 
 /***/ }),
 
-/***/ "./src/components/frontend/hooks/useAnimation.js":
+/***/ "./src/components/frontend/hooks/useAnimation.ts":
 /*!*******************************************************!*\
-  !*** ./src/components/frontend/hooks/useAnimation.js ***!
+  !*** ./src/components/frontend/hooks/useAnimation.ts ***!
   \*******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -568,9 +575,9 @@ function useAnimation(effect) {
 
 /***/ }),
 
-/***/ "./src/components/frontend/hooks/useApi.js":
+/***/ "./src/components/frontend/hooks/useApi.ts":
 /*!*************************************************!*\
-  !*** ./src/components/frontend/hooks/useApi.js ***!
+  !*** ./src/components/frontend/hooks/useApi.ts ***!
   \*************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -593,6 +600,7 @@ __webpack_require__.r(__webpack_exports__);
  *
  * @param {string} url
  */
+
 function useApi(url) {
   const [data, setData] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
   const [error, setError] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
@@ -602,19 +610,19 @@ function useApi(url) {
   const apiClient = async function (config, parent = 0) {
     setLoading(true);
     const params = new URLSearchParams({
-      orderby: config.orderby,
-      orderdir: config.orderdir,
-      parent,
-      showEmpty: config.show_empty,
+      orderby: String(config.orderby),
+      orderdir: String(config.orderdir),
+      parent: String(parent),
+      showEmpty: String(config.show_empty),
       taxonomy: 'category',
       type: 'post'
     });
-    if (typeof jclCurrentCat !== 'undefined' && config.onlycategory > 0) {
+    if (typeof jclCurrentCat !== 'undefined' && Number(config.onlycategory) > 0) {
       params.append('currentCat', jclCurrentCat);
     }
     if (config.categories) {
-      params.append('exclusionType', config.include_or_exclude);
-      params.append('cats', config.categories);
+      params.append('exclusionType', String(config.include_or_exclude));
+      params.append('cats', Array.isArray(config.categories) ? config.categories.join(',') : String(config.categories));
     }
     return _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default()({
       path: `${url}?${params.toString()}`
@@ -637,9 +645,9 @@ function useApi(url) {
 
 /***/ }),
 
-/***/ "./src/components/frontend/hooks/useFrontend.js":
+/***/ "./src/components/frontend/hooks/useFrontend.ts":
 /*!******************************************************!*\
-  !*** ./src/components/frontend/hooks/useFrontend.js ***!
+  !*** ./src/components/frontend/hooks/useFrontend.ts ***!
   \******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -798,9 +806,9 @@ module.exports = window["wp"]["i18n"];
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-/*!*********************!*\
-  !*** ./src/view.js ***!
-  \*********************/
+/*!**********************!*\
+  !*** ./src/view.tsx ***!
+  \**********************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
@@ -808,7 +816,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _components_frontend_App__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/frontend/App */ "./src/components/frontend/App.js");
+/* harmony import */ var _components_frontend_App__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/frontend/App */ "./src/components/frontend/App.tsx");
 
 /**
  * WordPress dependencies
